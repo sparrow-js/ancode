@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import {request} from '../lib/request';
+import {request} from './lib/request';
 import { map } from 'lodash';
 
 const textDecoder = new TextDecoder('utf-8');

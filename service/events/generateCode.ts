@@ -24,7 +24,6 @@ export async function streamGenerateCode(
   params: IGenerateCodeParams,
   socket: { enqueue: (v: any) => any },
 ) {
-  console.log('****************1');
   function noticeHost(data: Record<any, any>) {
     if (socket.enqueue) {
         socket.enqueue(encoder.encode(`${JSON.stringify(data)}\n`));
@@ -76,7 +75,6 @@ export async function streamGenerateCode(
     });
   } else {
     try {
-      console.log('****************2');
       completion = await streamingOpenAIResponses(
         prompt_messages,
         (content: string, event?: string) => {

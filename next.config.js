@@ -1,12 +1,20 @@
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 const { patchWebpackConfig } = require("next-global-css");
 
+const rewrites = async () => {
+  const ret = [];
+
+  return {
+      beforeFiles: ret,
+  };
+};
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
       ignoreDuringBuilds: true,
   },
+  rewrites,
   typescript: {
       ignoreBuildErrors: true,
   },
@@ -37,7 +45,6 @@ const nextConfig = {
 
     return config;
   },
-  pageExtensions: ['tsx']
 }
 
 module.exports = nextConfig

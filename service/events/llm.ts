@@ -1,7 +1,6 @@
 import OpenAI from 'openai';
 
 export async function streamingOpenAIResponses(messages, callback, params) {
-  console.log('****************3', params);
   if (!params.openAiApiKey) {
     callback('No openai key', 'error');
     return '';
