@@ -10,16 +10,18 @@ const initialData = {
     appState: {}
 };
 
+let ExcalidrawModule: any = null;
+
 function Whiteboard({doCreate}: Props) {
   const [Excalidraw, setExcalidraw] = useState(null);
-  const [exportToCanvas, setExportToCanvas] = useState<ReactElement>(<></>);
+ 
   const [excalidrawAPI, setExcalidrawAPI] = useState<any>(null);
   // const [canvasUrl, setCanvasUrl] = useState("");
 
   useEffect(() => {
     import("@excalidraw/excalidraw").then((comp) => {
+      ExcalidrawModule = comp;
       setExcalidraw(comp.Excalidraw as any);
-      setExportToCanvas(comp.exportToCanvas as any)
     });
   }, []);
 
@@ -32,17 +34,20 @@ function Whiteboard({doCreate}: Props) {
       if (!elements || !elements.length) {
         return
       }
-      const canvas = await (exportToCanvas as any)({
-        elements,
-        appState: {
-          ...initialData.appState,
-          exportWithDarkMode: false,
-        },
-        files: (excalidrawAPI as any).getFiles(),
-        // getDimensions: () => { return {width: 750, height: 750}}
-      });
-      // setCanvasUrl(canvas.toDataURL());
-      doCreate([canvas.toDataURL()])
+      if (ExcalidrawModule) {
+        const canvas = await (ExcalidrawModule).exportToCanvas ({
+          elements,
+          appState: {
+            ...initialData.appState,
+            exportWithDarkMode: false,
+          },
+          files: (excalidrawAPI as any).getFiles(),
+          // getDimensions: () => { return {width: 750, height: 750}}
+        });
+        // setCanvasUrl(canvas.toDataURL());
+        doCreate([canvas.toDataURL()])
+      }
+      
     }
 
   return (
