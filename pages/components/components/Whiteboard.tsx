@@ -1,10 +1,7 @@
 
 'use client';
-import React, {useState} from "react";
+import React, {useState, useEffect, ReactElement} from "react";
 import { FaHourglass } from "react-icons/fa";
-import { Excalidraw, exportToCanvas } from "@excalidraw/excalidraw";
-
-
 interface Props {
     doCreate: (urls: string[]) => void;
 }
@@ -14,9 +11,17 @@ const initialData = {
 };
 
 function Whiteboard({doCreate}: Props) {
-
-  const [excalidrawAPI, setExcalidrawAPI] = useState(null);
+  const [Excalidraw, setExcalidraw] = useState(null);
+  const [exportToCanvas, setExportToCanvas] = useState<ReactElement>(<></>);
+  const [excalidrawAPI, setExcalidrawAPI] = useState<any>(null);
   // const [canvasUrl, setCanvasUrl] = useState("");
+
+  useEffect(() => {
+    import("@excalidraw/excalidraw").then((comp) => {
+      setExcalidraw(comp.Excalidraw as any);
+      setExportToCanvas(comp.exportToCanvas as any)
+    });
+  }, []);
 
   const exportImg = async () => {
       if (!excalidrawAPI) {
@@ -27,7 +32,7 @@ function Whiteboard({doCreate}: Props) {
       if (!elements || !elements.length) {
         return
       }
-      const canvas = await exportToCanvas({
+      const canvas = await (exportToCanvas as any)({
         elements,
         appState: {
           ...initialData.appState,
@@ -42,7 +47,9 @@ function Whiteboard({doCreate}: Props) {
 
   return (
       <div className="absolute top-0 z-[10] w-full h-full">
-          <Excalidraw   
+          {Excalidraw ? (
+            // @ts-ignore
+            <Excalidraw   
               renderTopRightUI={() => (
                   <>
 
@@ -65,6 +72,7 @@ function Whiteboard({doCreate}: Props) {
               </MainMenu.Item>
             </MainMenu> */}
             </Excalidraw>
+          ) : null}
       </div>
   );
 }

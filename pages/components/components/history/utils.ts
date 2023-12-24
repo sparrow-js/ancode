@@ -30,3 +30,6 @@ export function extractHistoryTree(
 
   return flatHistory;
 }
+
+const t = {}
+export default t;

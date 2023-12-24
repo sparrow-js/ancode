@@ -34,11 +34,11 @@ export default function HistoryDisplay({
   revertToVersion,
   shouldDisableReverts,
 }: Props) {
-  return history.length === 0 ? null : (
+  return history && history.length === 0 ? null : (
     <div className="flex flex-col h-screen">
       <h1 className="font-bold mb-2">Versions</h1>
       <ul className="space-y-0 flex flex-col-reverse">
-        {history.map((item, index) => (
+        {history && history.map((item, index) => (
           <li key={index}>
             <HoverCard>
               <HoverCardTrigger

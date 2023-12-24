@@ -1,6 +1,5 @@
 import React from 'react'
 import App from './App'
-// import './mloader.ts'
 import { Toaster } from "react-hot-toast";
 import ContextWrapper from './contexts';
 

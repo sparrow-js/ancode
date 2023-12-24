@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import {PromptProvider} from './PromptContext'
+import PromptProvider from './PromptContext'
 
 export default function ContextWrapper({ children }: { children: ReactNode }) {
     return (

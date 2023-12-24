@@ -62,7 +62,7 @@ function SettingsDialog({ settings, setSettings }: Props) {
           <Input
             id="openai-api-key"
             placeholder="OpenAI API key"
-            value={settings.openAiApiKey || ""}
+            value={settings?.openAiApiKey || ""}
             onChange={(e) =>
               setSettings((s) => ({
                 ...s,
@@ -83,7 +83,7 @@ function SettingsDialog({ settings, setSettings }: Props) {
               <Input
                 id="openai-base-url"
                 placeholder="OpenAI Base URL"
-                value={settings.openAiBaseURL || ""}
+                value={settings?.openAiBaseURL || ""}
                 onChange={(e) =>
                   setSettings((s) => ({
                     ...s,
@@ -104,7 +104,7 @@ function SettingsDialog({ settings, setSettings }: Props) {
           </Label>
           <Switch
             id="image-generation"
-            checked={settings.mockAiResponse}
+            checked={settings?.mockAiResponse}
             onCheckedChange={() =>
               setSettings((s) => ({
                 ...s,

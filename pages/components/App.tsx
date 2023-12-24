@@ -22,7 +22,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import SettingsDialog from "./components/SettingsDialog";
 import { Settings, EditorTheme, AppState, GeneratedCodeConfig } from "./types";
 import { IS_RUNNING_ON_CLOUD } from "./config";
-import { OnboardingNote } from "./components/OnboardingNote";
+import OnboardingNote from "./components/OnboardingNote";
 import { usePersistedState } from "./hooks/usePersistedState";
 // import { UrlInputSection } from "./components/UrlInputSection";
 import html2canvas from "html2canvas";
@@ -34,10 +34,8 @@ import HistoryDisplay from "./components/history/HistoryDisplay";
 import { extractHistoryTree } from "./components/history/utils";
 import toast from "react-hot-toast";
 import PromptPanel from './components/PromptPanel';
-import dynamic from 'next/dynamic'
-const DynamicWhiteboard = dynamic(() => import('./components/Whiteboard'), {
-  ssr: false
-})
+
+import Whiteboard from './components/Whiteboard';
 import NativePreview from './components/NativeMobile';
 
 const IS_OPENAI_DOWN = false;
@@ -412,7 +410,7 @@ function App() {
           <div className="h-full" onClick={() => {
             setShowImageUpload(false);
           }}>
-            <DynamicWhiteboard doCreate={doCreate}/>
+            <Whiteboard doCreate={doCreate}/>
           </div>
         )}
         {

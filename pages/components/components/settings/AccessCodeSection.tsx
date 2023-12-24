@@ -30,10 +30,10 @@ function AccessCodeSection({ settings, setSettings }: Props) {
   const [isValid, setIsValid] = useState(false);
   const [usedCredits, setUsedCredits] = useState(0);
   const [totalCredits, setTotalCredits] = useState(0);
-  const throttledAccessCode = useThrottle(settings.accessCode || "", 500);
+  const throttledAccessCode = useThrottle(settings && settings.accessCode || "", 500);
 
   const fetchState = (() => {
-    if (!settings.accessCode) return FetchState.EMPTY;
+    if (settings && !settings.accessCode) return FetchState.EMPTY;
     if (isLoading) return FetchState.LOADING;
     if (!isValid) return FetchState.INVALID;
     return FetchState.VALID;
@@ -89,7 +89,7 @@ function AccessCodeSection({ settings, setSettings }: Props) {
         id="access-code"
         className="border-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
         placeholder="Enter your Screenshot to Code access code"
-        value={settings.accessCode || ""}
+        value={settings && settings.accessCode || ""}
         onChange={(e) =>
           setSettings((s) => ({
             ...s,

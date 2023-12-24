@@ -160,3 +160,5 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 }
+
+export default Select;

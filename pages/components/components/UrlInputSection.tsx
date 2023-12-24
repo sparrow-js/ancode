@@ -9,7 +9,7 @@ interface Props {
   doCreate: (urls: string[]) => void;
 }
 
-export function UrlInputSection({ doCreate, screenshotOneApiKey }: Props) {
+export default function UrlInputSection({ doCreate, screenshotOneApiKey }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [referenceUrl, setReferenceUrl] = useState("");
 

@@ -1,4 +1,5 @@
 import { Settings } from "../types";
+
 import {
     Dialog,
     DialogClose,
@@ -41,7 +42,7 @@ function PromptPanel({settings, setSettings}: Props) {
 
     async function addPromptHanler() {
         // generatedCodeConfig: "react_tailwind"
-        prompt.type = settings.generatedCodeConfig;
+        prompt.type = settings && settings.generatedCodeConfig;
         if (!prompt.prompt) {
             toast.error('enter prompt')
             return;
@@ -73,7 +74,7 @@ function PromptPanel({settings, setSettings}: Props) {
 
         setSelectedId('');
         
-    }, [settings.generatedCodeConfig, setSettings]);
+    }, [settings?.generatedCodeConfig, setSettings]);
 
     const updatePromptHandler = (e: any, id: string) => {
         e.stopPropagation();
@@ -173,7 +174,7 @@ function PromptPanel({settings, setSettings}: Props) {
                 </div>
                 {
                     promptList.map((prompt) => {
-                        if (prompt.type === settings.generatedCodeConfig) {
+                        if (prompt.type === (settings && settings.generatedCodeConfig)) {
                             return (
                                 <div 
                                     key={prompt.id} 

@@ -41,7 +41,7 @@ export interface PromptState{
 }
 
 export const promptContext = createContext<locationContextType>(initialValue);
-export function PromptProvider({ children }: { children: ReactNode }) {
+export default function PromptProvider({ children }: { children: ReactNode }) {
 
     const [promptList, setPromptList] = useState<PromptType[]>([]);
     const didMountRef = useRef(false);
