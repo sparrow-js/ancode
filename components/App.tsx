@@ -76,7 +76,7 @@ function App() {
   const [shouldIncludeResultImage, setShouldIncludeResultImage] =
     useState<boolean>(false);
 
-  const wsRef = useRef<WebSocket>(null);
+  const wsRef = useRef<AbortController>(null);
 
   // When the user already has the settings in local storage, newly added keys
   // do not get added to the settings so if it's falsy, we populate it with the default
@@ -130,8 +130,9 @@ function App() {
   };
 
   const stop = () => {
-    wsRef.current?.close?.(USER_CLOSE_WEB_SOCKET_CODE);
-    // make sure stop can correct the state even if the websocket is already closed
+    if (wsRef.current && !wsRef.current.signal.aborted) {
+      wsRef.current.abort();
+  }    // make sure stop can correct the state even if the websocket is already closed
     setAppState(AppState.CODE_READY);
   };
 
